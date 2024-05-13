@@ -19,12 +19,12 @@
             ID,
             NAME
         FROM
-            MEMBER
+            Member
         WHERE
             ID = #{id}
     </select>
     <insert id="save" parameterType="hashmap">
-        INSERT INTO MEMBER( ID, NAME)
+        INSERT INTO Member( ID, NAME)
         VALUES ( #{id}, #{name} )
     </insert>
 </mapper>
