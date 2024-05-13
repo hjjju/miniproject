@@ -22,7 +22,9 @@
 spring:
   profiles:
     active: mariadb
-
+  h2:
+    console:
+      enabled: true
 
 ---
 
@@ -38,15 +40,15 @@ spring:
 
 ---
 
-spring:
-  profiles:
-    active: mariadb
-  datasource:
-    hikari:
-      jdbc-url: jdbc:mariadb://localhost:3306/mini
-      username: root
-      password: 1234
-      driver-class-name: org.mariadb.jdbc.Driver
+#spring:
+#  profiles:
+#    active: mariadb
+#  datasource:
+#    hikari:
+#      jdbc-url: jdbc:mariadb://localhost:3306/mini
+#      username: root
+#      password: 1234
+#      driver-class-name: org.mariadb.jdbc.Driver
 #  jpa:
 #    hibernate:
 #      ddl-auto: create
@@ -57,6 +59,17 @@ spring:
 #  batch:
 #    job:
 #      enabl
+
+spring:
+  profiles:
+    active: mariadb
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mariadb://localhost:3306/HNTEST
+      username: USER
+      password: 1234
+      driver-class-name: org.mariadb.jdbc.Driver
+
 
 
 
