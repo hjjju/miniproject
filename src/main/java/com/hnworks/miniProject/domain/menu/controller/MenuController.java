@@ -21,12 +21,12 @@ public class MenuController {
 	}
 
 
-
-
-	@GetMapping("/test11")
-	public String test() {
-		log.info("controller...");
-		return "test";
+	@GetMapping("/index")
+	public String index() {
+		log.info("Common");
+		return "index";
 	}
+
+
 
 }

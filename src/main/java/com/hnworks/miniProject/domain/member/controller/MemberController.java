@@ -46,4 +46,12 @@ public class MemberController {
         MemberDto res = memberService.getMemberById(id);
         return res;
     }
+
+    
+//    @GetMapping("/")
+//    public String index() {
+//    	return "index";
+//    	
+//    }
+    
 }

@@ -1,23 +1,10 @@
-#spring:
-#  h2:
-#    console:
-#      enabled: true
-
-
-#  datasource-h2:
-#    hikari:
-#      driver-class-name: org.h2.Driver
-#      jdbc-url: jdbc:h2:~/test
-#      username: sa
-#      password:
-#      
-#  datasource:
-#    hikari:
-#    driver-class-name: org.mariadb.jdbc.Driver
-#    url: jdbc:mariadb://localhost:3306/mini?characterEncoding=UTF-8&serverTimezone=UTC
-#    username: root
-#    password: 1234
-    
+#spring-jsp:
+#  # View Resolver 설정
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/ # 요청에 응답 할 파일이 있는 경로
+#      suffix: .jsp # 클라이언트로부터 요청이 오면 해당 경로에 있는 .jsp파일로 응답할 것
+#   
 
 spring:
   profiles:
@@ -40,26 +27,6 @@ spring:
 
 ---
 
-#spring:
-#  profiles:
-#    active: mariadb
-#  datasource:
-#    hikari:
-#      jdbc-url: jdbc:mariadb://localhost:3306/mini
-#      username: root
-#      password: 1234
-#      driver-class-name: org.mariadb.jdbc.Driver
-#  jpa:
-#    hibernate:
-#      ddl-auto: create
-#    properties:
-#      hibernate:
-#        show_sql: true
-#        format_sql: true
-#  batch:
-#    job:
-#      enabl
-
 spring:
   profiles:
     active: mariadb
@@ -69,11 +36,6 @@ spring:
       username: USER
       password: 1234
       driver-class-name: org.mariadb.jdbc.Driver
-
-
-
-
-
 
 mybatis:
   mapper-locations:

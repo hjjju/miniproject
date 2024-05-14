@@ -61,7 +61,6 @@
 			<artifactId>h2</artifactId>
 		</dependency>
 
-
 		<!--
 		https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
 		<dependency>
@@ -82,7 +81,23 @@
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
 		</dependency>
-
+		<!-- jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- Servlet / ServletFilter 을 사용하기 위해 -->
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>6.0.0</version>
+		</dependency>
+		<!-- tomcat-embed-jasper -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
 		<!-- nexacroplatform14 >>> add nexacro platform adapter dependency -->
 		<dependency>
 			<groupId>com.nexacro.spring</groupId>
@@ -128,30 +143,6 @@
 			<artifactId>nexacro-excel</artifactId>
 			<version>1.0.1</version>
 		</dependency>
-<!--		<dependency>
-			<groupId>com.nexacro.spring</groupId>
-			<artifactId>nexacro-dataaccess</artifactId>
-			<version>1.0.0</version>
-			<exclusions> 전자정부프레임워크 스프링버전과의 충돌로 제외 처리 
-				<exclusion>
-					<artifactId>spring-jdbc</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-tx</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-core</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-beans</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>-->
-		<!-- nexacroplatform14 >>> add nexacro platform adapter dependency -->
 
 	</dependencies>
 
