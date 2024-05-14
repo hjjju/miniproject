@@ -23,15 +23,55 @@ public class MenuEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;//메뉴아이디 프라이머리키
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PARENTID")
-	private MenuEntity parent;
+	private Long parentId; //부모아이디
+	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "PARENTID")
+//	private MenuEntity parent;
 	
 	private String name;
 	
 	private int menuOrder; //메뉴 순서
 	
+	private String menuUrl;
 	
-	@OneToMany(mappedBy = "parent")
-	private List<MenuEntity> children = new ArrayList<>();
+	private String useYn;
+
+	public Long getId() {
+		return id;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getMenuOrder() {
+		return menuOrder;
+	}
+
+	public String getMenuUrl() {
+		return menuUrl;
+	}
+
+	public String getUseYn() {
+		return useYn;
+	}
+	
+	//연관관계 편의 메소드
+	public void addMenuEntity(Long id, Long parentId, String name, int menuOrder, String menuUrl, String useYn) {
+		this.id = id;
+		this.parentId = parentId;
+		this.name = name;
+		this.menuOrder = menuOrder;
+		this.menuUrl = menuUrl;
+		this.useYn = useYn;
+		
+	}
+	
+	
+	
 }
