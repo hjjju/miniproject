@@ -10,7 +10,7 @@
             // this._addService(prefixid, type, url, cachelevel, codepage, language, version, communication);
             this._addService("default_typedef.xml", "Base", "form", "./Base/", "", null, "", "0", "0");
             this._addService("default_typedef.xml", "Work", "form", "./Work", "", null, "", "", "0");
-            this._addService("default_typedef.xml", "svc", "JSP", "http://localhost:8080/", "", null, "", "", "0");
+            this._addService("default_typedef.xml", "svc", "JSP", "http://localhost:8080/", "session", null, "", "", "0");
 
             this._component_uri = (this._arg_compurl ? this._arg_compurl : "./nexacro14lib/component/");
             // load components
@@ -88,11 +88,11 @@
         
         this.mainframe_createBodyFrame = function()
         {
-            var obj = new ChildFrame("childframe", "absolute", null, null, null, null, null, null, "Work::frmHello.xfdl", this);
+            var obj = new ChildFrame("childframe", "absolute", null, null, null, null, null, null, "Work::frmMenu.xfdl", this);
             this.addChild(obj.name, obj);
             this.frame = obj;
 
-            obj.set_formurl("Work::frmHello.xfdl");
+            obj.set_formurl("Work::frmMenu.xfdl");
             obj.set_showtitlebar("false");
             obj.set_showstatusbar("false");
             obj = null;

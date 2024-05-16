@@ -80,7 +80,7 @@
         ],
         "form" :
         [
-         "./Work/frmHello.xfdl.js"
+         "./Work/frmMenu.xfdl.js"
         ],
         "xadl" :
         {

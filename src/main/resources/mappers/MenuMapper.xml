@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hnworks.miniProject.domain.menu.mapper.MenuMapper">
-<!-- 알리아스 설정 -->
-  
-    <!--    <select id="findById" parameterType="hashmap" resultType="hashmap">
+	<!-- 알리아스 설정 -->
+
+	<!--    <select id="findById" parameterType="hashmap" resultType="hashmap">
             SELECT
             ID,
             NAME
@@ -15,7 +13,7 @@
             ID = #{id}
         </select> -->
 
-<!--    <select id="findById" parameterType="String" resultType="hashmap">
+	<!--    <select id="findById" parameterType="String" resultType="hashmap">
         SELECT
             ID,
             NAME
@@ -24,8 +22,32 @@
         WHERE
             ID = #{id}
     </select> -->
-    <insert id="save" parameterType="MenuEntity">
-        INSERT INTO TBMENU( ID, NAME,PARENT_ID, MENU_ORDER, MENU_URL,USE_YN)
-        VALUES ( #{id}, #{name} ,#{parentId}, #{menuOrder}, #{menuUrl}, #{useYn} )
-    </insert>
+	<insert id="save" parameterType="MenuDto">
+		INSERT INTO TBMENU( MENU_ID, MENU_NAME,PARENT_ID, MENU_ORDER,
+		MENU_URL,USE_YN)
+		VALUES ( #{menuId}, #{menuName} ,#{parentId}, #{menuOrder}, #{menuUrl},
+		#{useYn} )
+	</insert>
+
+	<select id="findAll"  parameterType="MenuDto"  resultType="MenuDto">
+		SELECT
+		t.MENU_ID AS menuId,
+		t.MENU_NAME AS menuName,
+		t.MENU_ORDER AS menuOrder,
+		t.MENU_URL AS menuURL,
+		t.PARENT_ID AS parentId,
+		t.USE_YN AS useYn
+		FROM TBMENU t
+		<!--<if test="menuName != null and menuName != ''">
+	      <choose>
+	         LIKE의 %는 DB마다 방법이 다릅니다 
+	        <when test="searchType == 'ID'">
+	          AND ID LIKE '%' + #{menuName} + '%'
+	        </when>
+	        <when test="searchType == 'NAME'">
+	          AND NAME LIKE '%' + #{keyword} + '%'
+	        </when>
+	      </choose>
+    </if>-->
+	</select>
 </mapper>
