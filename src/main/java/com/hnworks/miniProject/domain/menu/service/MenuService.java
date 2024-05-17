@@ -10,13 +10,7 @@ public interface MenuService {
 	boolean saveMenu(MenuDto menuDto);
 
 
-//	List<MenuDto> getMenuList();
-
-//	List<Map<String, Object>> getMenuList();
+	List<MenuDto> getMenuList();
 
 
-//	List<Map<String, Object>> getMenuList(Map<String, String> ds_menu);
-
-
-	List<MenuDto> getMenuList(MenuDto menuDto);
 }

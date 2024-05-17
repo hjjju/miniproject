@@ -99,7 +99,7 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
 		<!-- nexacroplatform14 >>> add nexacro platform adapter dependency -->
-		
+
 		<dependency>
 			<groupId>com.nexacro.spring</groupId>
 			<artifactId>nexacro-core</artifactId>

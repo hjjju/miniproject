@@ -1,4 +1,4 @@
-package com.hnworks.miniProject.domain.member.dto;
+package com.hnworks.miniProject.domain.menu.dto;
 
 public class ResponseDto {
 

@@ -1,10 +1,4 @@
-#spring-jsp:
-#  # View Resolver 설정
-#  mvc:
-#    view:
-#      prefix: /WEB-INF/ # 요청에 응답 할 파일이 있는 경로
-#      suffix: .jsp # 클라이언트로부터 요청이 오면 해당 경로에 있는 .jsp파일로 응답할 것
-#   
+
 
 spring:
   profiles:
