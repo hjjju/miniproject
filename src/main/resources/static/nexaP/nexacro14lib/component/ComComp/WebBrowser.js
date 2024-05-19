@@ -202,7 +202,15 @@ if (!nexacro.WebBrowser) {
 			var ifrm_elem = this._ifrm_elem;
 			if (ifrm_elem) {
 				_win._block_deactivate = true;
-				ifrm_elem._setElementFocus();
+				if (ifrm_elem._prev_outfocus_message_elem && evt_name == "downkey") {
+					ifrm_elem._setElementOutFocus(ifrm_elem._prev_outfocus_message_elem);
+				}
+				else if (ifrm_elem._next_outfocus_message_elem && evt_name == "upkey") {
+					ifrm_elem._setElementOutFocus(ifrm_elem._next_outfocus_message_elem);
+				}
+				else {
+					ifrm_elem._setElementFocus();
+				}
 			}
 		}
 	};

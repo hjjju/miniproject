@@ -394,7 +394,12 @@ if (!nexacro.ScrollBar) {
 	_pScrollBar.on_apply_style_scrollbarsize = function () {
 		var cur = this.currentstyle.scrollbarsize;
 		if (cur && !cur._isEmpty) {
-			this.scrollbarsize = ((+cur._value) != (+cur._value)) ? -1 : (parseInt(cur._value) | 0);
+			var scrollbarsize = ((+cur._value) != (+cur._value)) ? -1 : (parseInt(cur._value) | 0);
+			if (scrollbarsize == this.scrollbarsize) {
+				return;
+			}
+
+			this.scrollbarsize = scrollbarsize;
 
 			var p_comp = this.parent;
 			if (p_comp && this._is_created_contents) {

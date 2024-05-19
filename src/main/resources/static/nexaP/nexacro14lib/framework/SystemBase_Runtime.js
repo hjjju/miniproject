@@ -1235,6 +1235,8 @@ if (nexacro.Browser == "Runtime") {
 					var i;
 					for (i = 0; i < rss.length; i++) {
 						var rs = rss[i];
+						idx0 = baseIdx[0];
+						idx1 = baseIdx[1];
 
 						while (true) {
 							if (!this._data_buffer[idx0]) {

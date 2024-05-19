@@ -20,148 +20,151 @@ if (!this.nexacro) {
 if (!nexacro.Init_systembase) {
 	nexacro.Init_systembase = true;
 
-	nexacro.Browser = "";
-	nexacro.BrowserVersion = -1;
-	nexacro.BrowserType = "";
+
 	nexacro.Browser_RoundBorder = 0;
 	nexacro.Browser_BorderImage = 0;
 	nexacro.Browser_Gradation = 0;
 	nexacro.Browser_RoundShadow = false;
 	nexacro.Browser_ColorAlpha = false;
 
-	nexacro.OS = "";
-	nexacro.OSVersion = "";
-	nexacro.DEVICE = "";
-	nexacro.SystemType = "";
-	nexacro.BrowserLang = "";
+	if (!nexacro._init_uafreezing) {
+		nexacro.Browser = "";
+		nexacro.BrowserVersion = -1;
+		nexacro.BrowserType = "";
+		nexacro.OS = "";
+		nexacro.OSVersion = "";
+		nexacro.DEVICE = "";
+		nexacro.SystemType = "";
+		nexacro.BrowserLang = "";
 
-	if (nexacro.__getOSType) {
-		nexacro.Browser = "Runtime";
-		nexacro.BrowserVersion = 14;
-		nexacro.BrowserType = "Runtime";
-	}
-	else {
-		if (navigator.appVersion.indexOf('MSIE') > -1) {
-			nexacro.Browser = "IE";
-			if (document.documentMode) {
-				nexacro.BrowserVersion = document.documentMode;
-				nexacro.BrowserType = nexacro.Browser + nexacro.BrowserVersion;
-			}
-			else {
-				var compatMode = document.compatMode;
-				if (compatMode && compatMode.toLowerCase() == "backcompat") {
-					if (/MSIE\s+7(.+)[;]/.test(navigator.appVersion)) {
-						nexacro.BrowserVersion = 7;
-						nexacro.BrowserType = "IE7";
-					}
-					else if (/MSIE\s+6(.+)[;]/.test(navigator.appVersion)) {
-						nexacro.BrowserVersion = 6;
-						nexacro.BrowserType = "IE6";
-					}
-					else if (/MSIE\s+5(.+)[;]/.test(navigator.appVersion)) {
-						nexacro.BrowserVersion = 5;
-						nexacro.BrowserType = "IE6";
-					}
+		if (nexacro.__getOSType) {
+			nexacro.Browser = "Runtime";
+			nexacro.BrowserVersion = 14;
+			nexacro.BrowserType = "Runtime";
+		}
+		else {
+			if (navigator.appVersion.indexOf('MSIE') > -1) {
+				nexacro.Browser = "IE";
+				if (document.documentMode) {
+					nexacro.BrowserVersion = document.documentMode;
+					nexacro.BrowserType = nexacro.Browser + nexacro.BrowserVersion;
 				}
-				compatMode = null;
+				else {
+					var compatMode = document.compatMode;
+					if (compatMode && compatMode.toLowerCase() == "backcompat") {
+						if (/MSIE\s+7(.+)[;]/.test(navigator.appVersion)) {
+							nexacro.BrowserVersion = 7;
+							nexacro.BrowserType = "IE7";
+						}
+						else if (/MSIE\s+6(.+)[;]/.test(navigator.appVersion)) {
+							nexacro.BrowserVersion = 6;
+							nexacro.BrowserType = "IE6";
+						}
+						else if (/MSIE\s+5(.+)[;]/.test(navigator.appVersion)) {
+							nexacro.BrowserVersion = 5;
+							nexacro.BrowserType = "IE6";
+						}
+					}
+					compatMode = null;
+				}
 			}
-		}
-		else if (navigator.userAgent.match(/Trident\/.*rv\:(.+?)[\);]/)) {
-			nexacro.Browser = "IE";
-			if (document.documentMode) {
-				nexacro.BrowserVersion = document.documentMode;
-				nexacro.BrowserType = nexacro.Browser + nexacro.BrowserVersion;
+			else if (navigator.userAgent.match(/Trident\/.*rv\:(.+?)[\);]/)) {
+				nexacro.Browser = "IE";
+				if (document.documentMode) {
+					nexacro.BrowserVersion = document.documentMode;
+					nexacro.BrowserType = nexacro.Browser + nexacro.BrowserVersion;
+				}
+				else {
+					nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
+				}
 			}
-			else {
+			else if (navigator.userAgent.match(/Edge/)) {
+				nexacro.Browser = "Edge";
+				nexacro.BrowserType = "Edge";
+				var versionRegExp = /Edge\/([\.\d]+)/;
+				versionRegExp.test(navigator.userAgent);
 				nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
+				versionRegExp = null;
 			}
-		}
-		else if (navigator.userAgent.match(/Edge/)) {
-			nexacro.Browser = "Edge";
-			nexacro.BrowserType = "Edge";
-			var versionRegExp = /Edge\/([\.\d]+)/;
-			versionRegExp.test(navigator.userAgent);
-			nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
-			versionRegExp = null;
-		}
-		else if (navigator.userAgent.match(/Edg/)) {
-			nexacro.Browser = "Edge";
-			nexacro.BrowserType = "Webkit";
-			var versionRegExp = /Edg\/([\.\d]+)/;
-			versionRegExp.test(navigator.userAgent);
-			nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
-			versionRegExp = null;
-		}
-		else if (!!window.opera || navigator.userAgent.match(/Opera/)) {
-			nexacro.Browser = "Opera";
-			nexacro.BrowserType = "Opera";
-			var versionRegExp = /Version\/([\.\d]+)/;
-			versionRegExp.test(navigator.userAgent);
-			nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
-			versionRegExp = null;
-		}
-		else if (navigator.userAgent.match(/Chrome/)) {
-			nexacro.Browser = "Chrome";
-			nexacro.BrowserType = "WebKit";
-			var versionRegExp = /Chrome\/([\.\d]+)/;
-			versionRegExp.test(navigator.userAgent);
-			nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
-			versionRegExp = null;
-		}
-		else if (navigator.userAgent.match(/CriOS/)) {
-			nexacro.Browser = "Chrome";
-			nexacro.BrowserType = "WebKit";
-			var versionRegExp = /CriOS\/([\.\d]+)/;
-			versionRegExp.test(navigator.userAgent);
-			nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
-			versionRegExp = null;
-		}
-		else if (navigator.userAgent.match(/Apple.*Mobile/) || (navigator.platform == "MacIntel" && navigator.maxTouchPoints > 1)) {
-			nexacro.Browser = "MobileSafari";
-			nexacro.BrowserType = "WebKit";
-			var versionRegExp = /Version\/([\.\d]+)/;
-			versionRegExp.test(navigator.userAgent);
-			nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
-			versionRegExp = null;
-		}
-		else if (navigator.userAgent.match(/AppleWebKit\//)) {
-			nexacro.Browser = "Safari";
-			nexacro.BrowserType = "WebKit";
-			var versionRegExp = /Version\/([\.\d]+)/;
-			versionRegExp.test(navigator.userAgent);
-			nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
-			versionRegExp = null;
-		}
-		else if (navigator.userAgent.match(/WebKit\//)) {
-			nexacro.Browser = "WebKit";
-			nexacro.BrowserType = "WebKit";
-			var versionRegExp = /WebKit\/([\.\d]+)/;
-			versionRegExp.test(navigator.userAgent);
-			nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
-			versionRegExp = null;
-		}
-		else if (navigator.userAgent.match(/Gecko\//)) {
-			nexacro.Browser = "Gecko";
-			var versionRegExp = /rv\:(.+?)[\);]/;
-			versionRegExp.test(navigator.userAgent);
-			nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
-			if (nexacro.BrowserVersion < 2) {
-				nexacro.BrowserType = "GeckoOld";
+			else if (navigator.userAgent.match(/Edg/)) {
+				nexacro.Browser = "Edge";
+				nexacro.BrowserType = "Webkit";
+				var versionRegExp = /Edg\/([\.\d]+)/;
+				versionRegExp.test(navigator.userAgent);
+				nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
+				versionRegExp = null;
 			}
-			else if (nexacro.BrowserVersion >= 10) {
-				nexacro.BrowserType = "GeckoNew";
+			else if (!!window.opera || navigator.userAgent.match(/Opera/)) {
+				nexacro.Browser = "Opera";
+				nexacro.BrowserType = "Opera";
+				var versionRegExp = /Version\/([\.\d]+)/;
+				versionRegExp.test(navigator.userAgent);
+				nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
+				versionRegExp = null;
 			}
-			else {
-				nexacro.BrowserType = "Gecko";
+			else if (navigator.userAgent.match(/Chrome/)) {
+				nexacro.Browser = "Chrome";
+				nexacro.BrowserType = "WebKit";
+				var versionRegExp = /Chrome\/([\.\d]+)/;
+				versionRegExp.test(navigator.userAgent);
+				nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
+				versionRegExp = null;
 			}
-			versionRegExp = null;
+			else if (navigator.userAgent.match(/CriOS/)) {
+				nexacro.Browser = "Chrome";
+				nexacro.BrowserType = "WebKit";
+				var versionRegExp = /CriOS\/([\.\d]+)/;
+				versionRegExp.test(navigator.userAgent);
+				nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
+				versionRegExp = null;
+			}
+			else if (navigator.userAgent.match(/Apple.*Mobile/) || (navigator.platform == "MacIntel" && navigator.maxTouchPoints > 1)) {
+				nexacro.Browser = "MobileSafari";
+				nexacro.BrowserType = "WebKit";
+				var versionRegExp = /Version\/([\.\d]+)/;
+				versionRegExp.test(navigator.userAgent);
+				nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
+				versionRegExp = null;
+			}
+			else if (navigator.userAgent.match(/AppleWebKit\//)) {
+				nexacro.Browser = "Safari";
+				nexacro.BrowserType = "WebKit";
+				var versionRegExp = /Version\/([\.\d]+)/;
+				versionRegExp.test(navigator.userAgent);
+				nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
+				versionRegExp = null;
+			}
+			else if (navigator.userAgent.match(/WebKit\//)) {
+				nexacro.Browser = "WebKit";
+				nexacro.BrowserType = "WebKit";
+				var versionRegExp = /WebKit\/([\.\d]+)/;
+				versionRegExp.test(navigator.userAgent);
+				nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
+				versionRegExp = null;
+			}
+			else if (navigator.userAgent.match(/Gecko\//)) {
+				nexacro.Browser = "Gecko";
+				var versionRegExp = /rv\:(.+?)[\);]/;
+				versionRegExp.test(navigator.userAgent);
+				nexacro.BrowserVersion = parseInt(RegExp.$1) | 0;
+				if (nexacro.BrowserVersion < 2) {
+					nexacro.BrowserType = "GeckoOld";
+				}
+				else if (nexacro.BrowserVersion >= 10) {
+					nexacro.BrowserType = "GeckoNew";
+				}
+				else {
+					nexacro.BrowserType = "Gecko";
+				}
+				versionRegExp = null;
 
-			var eventNames = ["mousedown", "mouseup", "mousemove"];
-			GeckoEventListenerCallback = function (e) {
-				window.event = e;
-			};
-			for (var i = 0, n = eventNames.length; i < n; i++) {
-				window.addEventListener(eventNames[i], GeckoEventListenerCallback, false);
+				var eventNames = ["mousedown", "mouseup", "mousemove"];
+				GeckoEventListenerCallback = function (e) {
+					window.event = e;
+				};
+				for (var i = 0, n = eventNames.length; i < n; i++) {
+					window.addEventListener(eventNames[i], GeckoEventListenerCallback, false);
+				}
 			}
 		}
 	}

@@ -2513,7 +2513,7 @@ if (!nexacro.TextArea) {
 
 				if (elem) {
 					var caret_line = elem.getCaretLine();
-					if (caret_line <= 1) {
+					if (caret_line <= 1 || this.readonly) {
 						want_arrow = false;
 					}
 				}
@@ -2538,7 +2538,7 @@ if (!nexacro.TextArea) {
 						}
 					}
 
-					if (caret_line >= max_line) {
+					if (caret_line >= max_line || this.readonly) {
 						want_arrow = false;
 					}
 				}

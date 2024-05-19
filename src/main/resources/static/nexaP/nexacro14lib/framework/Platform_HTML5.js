@@ -3067,6 +3067,7 @@ if (nexacro.Browser != "Runtime") {
 					return _win_handle.innerWidth;
 				}
 			};
+
 			nexacro._getWindowHandleClientHeight = function (_win_handle, id) {
 				if (nexacro.OS == "iOS" && nexacro.Browser == "MobileSafari" && (nexacro._isHybrid && nexacro._isHybrid())) {
 					if (nexacro._is_attach_childframe) {
@@ -3084,7 +3085,14 @@ if (nexacro.Browser != "Runtime") {
 						return _win_handle.document.documentElement.clientHeight;
 					}
 					else {
-						return _win_handle.document.body.clientHeight;
+						if (nexacro._allow_default_pinchzoom) {
+							var clientHeight = _win_handle.document.body.clientHeight;
+							var innerHeight = _win_handle.innerHeight;
+							return clientHeight > innerHeight ? clientHeight : innerHeight;
+						}
+						else if (_tester && _tester.use_windowsize_as_bodysize) {
+							return _win_handle.document.body.clientHeight;
+						}
 					}
 				}
 				else {

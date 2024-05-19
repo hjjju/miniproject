@@ -2067,7 +2067,7 @@ if (!nexacro.Form) {
 			for (var i = 0; i < comp_len; i++) {
 				var comp = comps[i];
 
-				if (!comp || !comp._is_created || !comp.visible || ((comp._isEnable && !comp._isEnable() || !comp.enable) && (!nexacro._enableaccessibility || nexacro._accessibilitytype != 5)) || comp._popup) {
+				if (!comp || !comp._is_created || !comp.visible || ((comp._isEnable && !comp._isEnable() || !comp.enable) && (!nexacro._enableaccessibility)) || comp._popup) {
 					continue;
 				}
 
@@ -2521,6 +2521,10 @@ if (!nexacro.Form) {
 			var comp_len = comps.length;
 			for (var i = 0; i < comp_len; i++) {
 				comps[i].on_apply_positionstep(comps[i].positionstep);
+			}
+
+			for (var i = 0; i < comp_len; i++) {
+				comps[i].getElement()._parent_elem._changing_zindex = false;
 			}
 
 			this.on_apply_style_stepshowtype(this.style.stepshowtype);
@@ -4185,7 +4189,9 @@ if (!nexacro.Form) {
 					newfocus_comp[0]._setFocus(true, 2, true);
 				}
 				var root_window = this._getRootWindow();
-				root_window._keydown_element._event_stop = true;
+				if (root_window && root_window._keydown_element) {
+					root_window._keydown_element._event_stop = true;
+				}
 				return true;
 			}
 		}
@@ -4202,7 +4208,9 @@ if (!nexacro.Form) {
 					newfocus_comp[0]._setFocus(true, 3, true);
 				}
 				var root_window = this._getRootWindow();
-				root_window._keydown_element._event_stop = true;
+				if (root_window && root_window._keydown_element) {
+					root_window._keydown_element._event_stop = true;
+				}
 				return true;
 			}
 		}
@@ -5714,6 +5722,21 @@ if (!nexacro.Form) {
 			var label = this._getAccessibilityWholeReadLabel();
 			control.notifyAccessibility(label, type);
 		}
+	};
+
+	_pForm._isComposition = function () {
+		var comps = this.components;
+		var comp_len = comps.length;
+		for (var i = 0; i < comp_len; i++) {
+			if (comps[i]._has_inputElement) {
+				var _api = comps[i]._edit_base_api;
+				var elem = comps[i]._input_element;
+				if (_api._is_composition() || elem._is_ios_composition) {
+					return false;
+				}
+			}
+		}
+		return true;
 	};
 
 

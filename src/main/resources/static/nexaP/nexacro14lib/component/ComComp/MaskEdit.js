@@ -600,7 +600,7 @@ if (!nexacro.MaskEdit) {
 						keypad_type = "text";
 					}
 
-					input_elem.setElementInputType(keypad_type, true);
+					input_elem._setElementKeypadType(keypad_type);
 
 					if (api._is_selected()) {
 						api._accept_blur_event = false;

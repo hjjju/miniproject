@@ -123,12 +123,13 @@ if (nexacro.Browser != "Runtime") {
 		nexacro.Browser_ColorAlpha = false;
 		nexacro.Browser_Transform = 0;
 		nexacro.Browser_Transform3d = 0;
-
-		nexacro.OS = "";
-		nexacro.OSVersion = "";
-		nexacro.DEVICE = "";
-		nexacro.SystemType = "";
-		nexacro.BrowserLang = "";
+		if (!nexacro._init_uafreezing) {
+			nexacro.OS = "";
+			nexacro.OSVersion = "";
+			nexacro.DEVICE = "";
+			nexacro.SystemType = "";
+			nexacro.BrowserLang = "";
+		}
 
 		if (nexacro.BrowserType == "Edge" || nexacro.Browser == "IE") {
 			if (nexacro.BrowserVersion >= 9) {
@@ -236,70 +237,72 @@ if (nexacro.Browser != "Runtime") {
 			nexacro.Browser_RoundShadow = true;
 			nexacro.Browser_ColorAlpha = true;
 		}
-		(function () {
-			var _regexp_detectos = [{
-				OS : "Windows", 
-				systype : "win32", 
-				expr : "Windows\\sNT\\s([0-9\\.]*)"
-			}, {
-				OS : "Windows Phone", 
-				systype : "win32", 
-				expr : "Windows Phone.*OS\\s([\\d_]+)"
-			}, {
-				OS : "Mac OS", 
-				systype : "mac", 
-				expr : "Mac\\sOS[\\s|a-z|A-Z]+\\s([\\d_]+)"
-			}, {
-				OS : "iOS", 
-				systype : "ipad", 
-				expr : "iPad[\\s|a-z|A-Z|;]+OS\\s([\\d_]+)"
-			}, {
-				OS : "iOS", 
-				systype : "iphone", 
-				expr : "iPhone\\sOS\\s([\\d_]+)"
-			}, {
-				OS : "Android", 
-				systype : "android", 
-				expr : "Android\\s+([\\d.]+)"
-			}, {
-				OS : "Linux", 
-				systype : "linux", 
-				expr : "Linux\\s+([\\w]+)"
-			}
-			];
-
-			var cnt = _regexp_detectos.length;
-			for (var i = 0; i < cnt; i++) {
-				var info = _regexp_detectos[i];
-				var version = navigator.userAgent.match(new RegExp(info.expr, 'i'));
-				if (version) {
-					nexacro.OSVersion = version[1].replace(/_/g, '.');
-					if (info.OS == "Mac OS" && navigator.platform == "MacIntel" && navigator.maxTouchPoints > 1) {
-						nexacro.OS = "iOS";
-						nexacro.SystemType = "ipad";
-						if (parseFloat(nexacro.OSVersion) < 13) {
-							nexacro.OSVersion = "13";
-						}
-					}
-					else {
-						nexacro.OS = info.OS;
-						nexacro.SystemType = info.systype;
-						if (nexacro.OS == "iOS") {
-							nexacro._num_osversion = parseFloat(nexacro.OSVersion);
-						}
-					}
-					break;
+		if (!nexacro._init_uafreezing) {
+			(function () {
+				var _regexp_detectos = [{
+					OS : "Windows", 
+					systype : "win32", 
+					expr : "Windows\\sNT\\s([0-9\\.]*)"
+				}, {
+					OS : "Windows Phone", 
+					systype : "win32", 
+					expr : "Windows Phone.*OS\\s([\\d_]+)"
+				}, {
+					OS : "Mac OS", 
+					systype : "mac", 
+					expr : "Mac\\sOS[\\s|a-z|A-Z]+\\s([\\d_]+)"
+				}, {
+					OS : "iOS", 
+					systype : "ipad", 
+					expr : "iPad[\\s|a-z|A-Z|;]+OS\\s([\\d_]+)"
+				}, {
+					OS : "iOS", 
+					systype : "iphone", 
+					expr : "iPhone\\sOS\\s([\\d_]+)"
+				}, {
+					OS : "Android", 
+					systype : "android", 
+					expr : "Android\\s+([\\d.]+)"
+				}, {
+					OS : "Linux", 
+					systype : "linux", 
+					expr : "Linux\\s+([\\w]+)"
 				}
-			}
+				];
 
-			if (nexacro.OS == "") {
-				var version = navigator.userAgent.match("Android");
-
-				if (version) {
-					nexacro.OS = version[0];
+				var cnt = _regexp_detectos.length;
+				for (var i = 0; i < cnt; i++) {
+					var info = _regexp_detectos[i];
+					var version = navigator.userAgent.match(new RegExp(info.expr, 'i'));
+					if (version) {
+						nexacro.OSVersion = version[1].replace(/_/g, '.');
+						if (info.OS == "Mac OS" && navigator.platform == "MacIntel" && navigator.maxTouchPoints > 1) {
+							nexacro.OS = "iOS";
+							nexacro.SystemType = "ipad";
+							if (parseFloat(nexacro.OSVersion) < 13) {
+								nexacro.OSVersion = "13";
+							}
+						}
+						else {
+							nexacro.OS = info.OS;
+							nexacro.SystemType = info.systype;
+							if (nexacro.OS == "iOS") {
+								nexacro._num_osversion = parseFloat(nexacro.OSVersion);
+							}
+						}
+						break;
+					}
 				}
-			}
-		})();
+
+				if (nexacro.OS == "") {
+					var version = navigator.userAgent.match("Android");
+
+					if (version) {
+						nexacro.OS = version[0];
+					}
+				}
+			})();
+		}
 
 
 		if (navigator) {
@@ -515,13 +518,15 @@ if (nexacro.Browser != "Runtime") {
 				if (e.stack && e.stack.length > 0) {
 					for (var i = 0; i < e.stack.length; i++) {
 						var frame = e.stack[i];
-						var url = frame.getEvalOrigin();
-						var method = frame.toString().split(" (")[0];
-						if (!method) {
-							break;
-						}
+						if (typeof frame != "string") {
+							var url = frame.getEvalOrigin();
+							var method = frame.toString().split(" (")[0];
+							if (!method) {
+								break;
+							}
 
-						msg += "\r\nat line " + frame.getLineNumber() + ", in function: " + method + " in " + decodeURI(url);
+							msg += "\r\nat line " + frame.getLineNumber() + ", in function: " + method + " in " + decodeURI(url);
+						}
 					}
 				}
 
@@ -5031,7 +5036,7 @@ if (nexacro.Browser != "Runtime") {
 							label = application._getErrorMessge("msg_accessibility_emptyline");
 						}
 						node.innerText = label;
-						nexacro.__setDOMNodeAccessibilityRole(node, "listitem");
+						nexacro.__setDOMNodeAccessibilityRole(node, "document");
 						nexacro.__setDOMNodeAccessibilityActiveDescendant(_handle, node.id);
 
 						if (elem && elem._input_handle) {
@@ -5056,6 +5061,7 @@ if (nexacro.Browser != "Runtime") {
 					else {
 						var node = nodes[0];
 						node.innerText = label;
+						nexacro.__setDOMNodeAccessibilityRole(node, "document");
 					}
 				}
 				this._index = this._index ^ 1;
@@ -8251,14 +8257,16 @@ if (nexacro.Browser != "Runtime") {
 			}
 
 			var header_vars = nexacro._getLocalStorage("_header_variables", []);
-			var header_vars_len = header_vars.length;
-			if (header_vars_len > 0) {
-				var header_id, header_value;
-				for (var i = 0; i < header_vars_len; i++) {
-					header_id = header_vars[i];
-					header_value = application[header_id];
-					if (header_id && header_value) {
-						ajax_handle.setRequestHeader(header_id, header_value);
+			if (header_vars) {
+				var header_vars_len = header_vars.length;
+				if (header_vars_len > 0) {
+					var header_id, header_value;
+					for (var i = 0; i < header_vars_len; i++) {
+						header_id = header_vars[i];
+						header_value = application[header_id];
+						if (header_id && header_value) {
+							ajax_handle.setRequestHeader(header_id, header_value);
+						}
 					}
 				}
 			}
@@ -11854,6 +11862,8 @@ if (nexacro.Browser != "Runtime") {
 						return "Windows 8.1";
 					case "10.0":
 						return "Windows 10";
+					case "11.0":
+						return "Windows 11";
 				}
 			}
 
@@ -12582,6 +12592,60 @@ if (nexacro.Browser != "Runtime") {
 				"webbrowser" : "", 
 				"link" : "link", 
 				"heading" : ""
+			};
+		}
+		else if (nexacro.Browser == "Chrome" || (nexacro.Browser == "Edge" && nexacro.BrowserType == "WebKit")) {
+			nexacro._roleList = 
+				{
+				"alert" : "alert", 
+				"application" : "application", 
+				"button" : "button", 
+				"calendar" : "", 
+				"chart" : "", 
+				"checkbox" : "checkbox", 
+				"columnheader" : "gridcell", 
+				"combobox" : "combobox", 
+				"datepicker" : "", 
+				"dialog" : "dialog", 
+				"fileupload" : "", 
+				"form" : "document", 
+				"frame" : "", 
+				"grid" : "", 
+				"gridcell" : "gridcell", 
+				"groupbox" : "group", 
+				"image" : "img", 
+				"listbox" : "listbox", 
+				"listboxitem" : "listitem", 
+				"menubar" : "menubar", 
+				"menu" : "menu", 
+				"menuitem" : "menuitem", 
+				"none" : "document", 
+				"progressbar" : "document", 
+				"radio" : "document", 
+				"radioitem" : "radio", 
+				"rowheader" : "document", 
+				"scrollbar" : "scrollbar", 
+				"slider" : "slider", 
+				"spin" : "textbox", 
+				"splitter" : "", 
+				"static" : "document", 
+				"statusbar" : "status", 
+				"step" : "document", 
+				"tab" : "tablist", 
+				"tabitem" : "tab", 
+				"tabpage" : "tabpanel", 
+				"textarea" : "document", 
+				"textbox" : "textbox", 
+				"titlebar" : "region", 
+				"toolbar" : "toolbar", 
+				"tooltip" : "tooltip", 
+				"treegrid" : "tree", 
+				"treeitem" : "treeitem", 
+				"webbrowser" : "", 
+				"webview" : "", 
+				"link" : "link", 
+				"heading" : "", 
+				"noread" : ""
 			};
 		}
 		else {

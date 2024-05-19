@@ -3774,6 +3774,34 @@ if (!nexacro.Component) {
 
 		var enable_flag = (v && this.enable);
 		if (this._real_enable != enable_flag) {
+			if (this._bind_event && enable_flag) {
+				var _form = this._getForm();
+				var _binds = _form.binds;
+				var _binds_len = _binds ? _binds.length : 0;
+				for (var i = 0; i < _binds_len; i++) {
+					if (_form[_binds[i].datasetid] && _binds[i].compid == this.id) {
+						if (_form[_binds[i].datasetid].rowcount <= 0) {
+							return;
+						}
+
+						var colinfos = _form[_binds[i].datasetid].colinfos;
+						var colinfos_len = colinfos ? colinfos.length : 0;
+						var bColumn = false;
+						for (var j = 0; j < colinfos_len; j++) {
+							if (colinfos[j].id == _binds[i].columnid) {
+								bColumn = true;
+								break;
+							}
+						}
+						if (!bColumn) {
+							return;
+						}
+
+						break;
+					}
+				}
+			}
+
 			var control_elem = this._control_element;
 			this._real_enable = enable_flag;
 
@@ -4313,7 +4341,7 @@ if (!nexacro.Component) {
 			return;
 		}
 
-		if (!this._isVisible() || !this._isEnable() || !this._isFocusAcceptable()) {
+		if (!nexacro._enableaccessibility && (!this._isVisible() || !this._isEnable() || !this._isFocusAcceptable())) {
 			return;
 		}
 

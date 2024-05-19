@@ -1,15 +1,21 @@
-
-
 spring:
+  main:
+    allow-bean-definition-overriding: true
   profiles:
     active: mariadb
   h2:
     console:
       enabled: true
-  mvc:
-    hiddenmethod:
-      filter:
-        enabled: true
+#  mvc:
+#    hiddenmethod:
+#      filter:
+#        enabled: true
+
+---
+#spring:
+#  mvc:
+#    view:
+#      suffix: .html
 
 ---
 
@@ -26,6 +32,12 @@ spring:
 ---
 
 spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+---
+spring:
   profiles:
     active: mariadb
   mvc:
@@ -35,13 +47,14 @@ spring:
   datasource:
     hikari:
       jdbc-url: jdbc:mariadb://localhost:3306/HNTEST
-      username: USER
+#      username: USER
+      username: user
       password: 1234
       driver-class-name: org.mariadb.jdbc.Driver
 
 mybatis:
   mapper-locations:
     - mappers/*.xml
-  type-aliases-package: com.hnworks.miniProject.domain
+  type-aliases-package: com.hnworks.miniProject.domain.menu.dto
   configuration:
     map-underscore-to-camel-case: true

@@ -1074,7 +1074,7 @@ if (!nexacro.Decimal) {
 		}
 
 		var _cvt = this._getCVT();
-		if (_cvt.exp >= -5 && _cvt.exp <= 24) {
+		if (_cvt.dec >= -5 && _cvt.dec <= 24) {
 			return this._toStandardStr(_cvt);
 		}
 

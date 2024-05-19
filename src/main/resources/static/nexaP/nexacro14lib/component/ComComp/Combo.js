@@ -2617,7 +2617,7 @@ if (!nexacro.Combo) {
 			if (nexacro.Browser == "Chrome" || (nexacro.Browser == "Edge" && nexacro.BrowserType == "Webkit")) {
 				var api = obj._edit_base_api;
 				if (api) {
-					var _skip_combo_text_changed = (e.pretext == "" && api._pasteAction == false) || (e.posttext == "" && (api._is_composition ? api._is_composition() : false));
+					var _skip_combo_text_changed = (e.posttext == "" && (api._is_composition ? api._is_composition() : false));
 					if (_skip_combo_text_changed) {
 						return nexacro._toBoolean(ret);
 					}
@@ -3250,6 +3250,10 @@ if (!nexacro.Combo) {
 					combolist.getElement().setElementVScrollPos(1);
 				}
 				combolist.getElement().setElementVScrollPos(0);
+
+				if (nexacro.OS == "iOS") {
+					combolist._applyScrollPos();
+				}
 			}
 
 
