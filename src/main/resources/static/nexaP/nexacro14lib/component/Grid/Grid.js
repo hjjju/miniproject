@@ -3087,7 +3087,7 @@ if (!nexacro.Grid) {
 				editComp._setFocus(false);
 			}
 
-			if (grid.autoenter == "select" && grid._lbuttondown_proc && editComp._apply_pushed_pseudo) {
+			if (grid.autoenter == "select" && grid._lbuttondown_proc) {
 				editComp._user_push = true;
 				editComp._stat_change("focus", "pushed");
 				editComp._is_pushed_area = true;
@@ -4526,7 +4526,7 @@ if (!nexacro.Grid) {
 						}
 					}
 
-					input_elem._setElementKeypadType(keypad_type);
+					input_elem.setElementInputType(keypad_type, true);
 
 					if (api._is_selected()) {
 						api._accept_blur_event = false;
@@ -4546,8 +4546,6 @@ if (!nexacro.Grid) {
 				}
 
 				if (this._grid._lbuttondown_proc) {
-					input_elem.setElementFocus();
-
 					if (this.setCaretPos) {
 						if (!this.autoselect) {
 							if (!this._grid._onceTime_focus) {
@@ -4558,6 +4556,7 @@ if (!nexacro.Grid) {
 							this.setSelect(0, -1);
 						}
 					}
+					input_elem.setElementFocus();
 				}
 			}
 		}
@@ -6117,7 +6116,7 @@ if (!nexacro.Grid) {
 							keypad_type = "text";
 						}
 
-						input_elem._setElementKeypadType(keypad_type);
+						input_elem.setElementInputType(keypad_type, true);
 
 						if (api._is_selected()) {
 							api._accept_blur_event = false;
@@ -6138,8 +6137,6 @@ if (!nexacro.Grid) {
 				}
 
 				if (this._grid._lbuttondown_proc) {
-					input_elem.setElementFocus();
-
 					if (this.setCaretPos) {
 						if (!this.autoselect) {
 							if (!this._grid._onceTime_focus) {
@@ -6150,6 +6147,7 @@ if (!nexacro.Grid) {
 							this.setSelect(0, -1);
 						}
 					}
+					input_elem.setElementFocus();
 				}
 			}
 		}
@@ -8252,7 +8250,6 @@ if (!nexacro.Grid) {
 		}
 
 		var cursor = this._find_pseudo_obj("cursor", pseudo) || this._cellobj.on_find_CurrentStyle_cursor(pseudo);
-		this.currentstyle.cursor = cursor;
 		return (cursor) ? cursor : nexacro.Component._default_cursor;
 	};
 

@@ -1,5 +1,6 @@
 package com.hnworks.miniProject.domain.menu.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +10,6 @@ public interface MenuService {
 
 	boolean saveMenu(MenuDto menuDto);
 
-
 	List<MenuDto> getMenuList();
-
 
 }

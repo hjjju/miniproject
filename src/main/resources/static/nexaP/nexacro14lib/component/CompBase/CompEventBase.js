@@ -196,7 +196,7 @@ if (nexacro.Component) {
 
 	_pComponent._setfocusing_comp = null;
 	_pComponent._on_focus = function (self_flag, evt_name, lose_focus, refer_lose_focus, new_focus, refer_new_focus) {
-		if (!this._is_alive || !this.visible || (!nexacro._enableaccessibility && !this._isEnable()) || this._is_loading) {
+		if (!this._is_alive || !this.visible || !this._isEnable() || this._is_loading) {
 			return;
 		}
 

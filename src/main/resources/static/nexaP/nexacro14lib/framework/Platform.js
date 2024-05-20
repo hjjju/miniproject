@@ -314,25 +314,23 @@ if (!nexacro._bInitPlatform) {
 		nexacro._requestDevicePermission(permission_types, description);
 	};
 
-	if (!nexacro._is_ua_freeze || !nexacro._is_ua_loading) {
-		nexacro.System._os == nexacro.OS;
-		nexacro.System.computername = nexacro._getComputerName();
-		nexacro.System.cpuarchitecture = nexacro._getCPUArchitecture();
-		nexacro.System.cpucount = nexacro._getCPUCount();
-		nexacro.System.cputype = nexacro._getCPUType();
-		nexacro.System.locale = nexacro._getLocale();
-		nexacro.System.loginuser = nexacro._getLoginUser();
-		nexacro.System.mobileorientation = nexacro._getMobileOrientation();
-		nexacro.System.mobilephonenumber = nexacro._getMobilePhoneNumber();
-		nexacro.System.mobileproducttype = nexacro._getMobileProductType();
-		nexacro.System.mobileuniqueid = nexacro._getMobileUniqueID();
-		nexacro.System.monitorcount = nexacro._getMonitorCount();
-		nexacro.System.navigatorname = nexacro._getNavigatorName();
-		nexacro.System.navigatorversion = nexacro.BrowserVersion;
-		nexacro.System.osversion = nexacro._getOSVersion();
-		nexacro.System.taskbarsize = nexacro._getTaskbarSize();
-		nexacro.System._language = nexacro._getLanguage();
-	}
+	nexacro.System._os == nexacro.OS;
+	nexacro.System.computername = nexacro._getComputerName();
+	nexacro.System.cpuarchitecture = nexacro._getCPUArchitecture();
+	nexacro.System.cpucount = nexacro._getCPUCount();
+	nexacro.System.cputype = nexacro._getCPUType();
+	nexacro.System.locale = nexacro._getLocale();
+	nexacro.System.loginuser = nexacro._getLoginUser();
+	nexacro.System.mobileorientation = nexacro._getMobileOrientation();
+	nexacro.System.mobilephonenumber = nexacro._getMobilePhoneNumber();
+	nexacro.System.mobileproducttype = nexacro._getMobileProductType();
+	nexacro.System.mobileuniqueid = nexacro._getMobileUniqueID();
+	nexacro.System.monitorcount = nexacro._getMonitorCount();
+	nexacro.System.navigatorname = nexacro._getNavigatorName();
+	nexacro.System.navigatorversion = nexacro.BrowserVersion;
+	nexacro.System.osversion = nexacro._getOSVersion();
+	nexacro.System.taskbarsize = nexacro._getTaskbarSize();
+	nexacro.System._language = nexacro._getLanguage();
 	nexacro.System.notificationtoken = null;
 	nexacro.System._accessibilitytype = null;
 	nexacro.System._accessibilitystatus = nexacro._getAccessibilityStatus();

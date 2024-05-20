@@ -5412,7 +5412,6 @@ if (!nexacro.Tab) {
 
 	_pTab.moveTabpage = function (nFromIndex, nToIndex) {
 		var child_list = this.components;
-		var child_list1 = this.all;
 		var len = child_list.length;
 		if (nToIndex < 0 || len <= nToIndex || len <= nFromIndex || nFromIndex < 0) {
 			return -1;
@@ -5455,6 +5454,8 @@ if (!nexacro.Tab) {
 			for (var i = nFromIndex + 1; i < len; i++) {
 				this._child_list[i - 1] = this._child_list[i];
 				this._child_list[i - 1]._index = i - 1;
+				child_list[i - 1] = child_list[i];
+				child_list[i - 1]._index = i - 1;
 				tabButtons[i - 1] = tabButtons[i];
 				tabButtons[i - 1]._index = i - 1;
 				buttonRect[i - 1] = buttonRect[i];
@@ -5466,12 +5467,8 @@ if (!nexacro.Tab) {
 				if (i == nToIndex) {
 					this._child_list[i] = fromtabpage;
 					this._child_list[i]._index = i;
-
-					child_list.delete_item(fromtabpage.id);
-					child_list.insert_item(i, fromtabpage.id, fromtabpage);
-					child_list1.delete_item(fromtabpage.id);
-					child_list1.insert_item(i, fromtabpage.id, fromtabpage);
-
+					child_list[i] = fromtabpage;
+					child_list[i]._index = i;
 					tabButtons[i] = frombutton;
 					tabButtons[i]._index = i;
 					buttonRect[i] = frombuttonrc;
@@ -5487,6 +5484,8 @@ if (!nexacro.Tab) {
 			for (var i = nFromIndex; i > nToIndex; i--) {
 				this._child_list[i] = this._child_list[i - 1];
 				this._child_list[i]._index = i;
+				child_list[i] = child_list[i - 1];
+				child_list[i]._index = i;
 				tabButtons[i] = tabButtons[i - 1];
 				tabButtons[i]._index = i;
 				buttonRect[i] = buttonRect[i - 1];
@@ -5498,12 +5497,8 @@ if (!nexacro.Tab) {
 
 			this._child_list[i] = fromtabpage;
 			this._child_list[i]._index = i;
-
-			child_list.delete_item(fromtabpage.id);
-			child_list.insert_item(i, fromtabpage.id, fromtabpage);
-			child_list1.delete_item(fromtabpage.id);
-			child_list1.insert_item(i, fromtabpage.id, fromtabpage);
-
+			child_list[i] = fromtabpage;
+			child_list[i]._index = i;
 			tabButtons[i] = frombutton;
 			tabButtons[i]._index = i;
 			buttonRect[i] = frombuttonrc;
@@ -5513,6 +5508,7 @@ if (!nexacro.Tab) {
 			extrabuttons[i]._index = i;
 		}
 
+		this.all = this.components;
 
 		len = child_list.length;
 		for (var i = 0; i < len; i++) {

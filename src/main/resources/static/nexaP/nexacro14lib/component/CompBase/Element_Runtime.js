@@ -1548,12 +1548,6 @@ if (nexacro.Browser == "Runtime") {
 		_pInputElement.setElementInputTypeKeypad = function (type) {
 		};
 
-		_pInputElement._setElementKeypadType = function (type) {
-		};
-
-		_pInputElement._restoreElementKeypadType = function () {
-		};
-
 		_pInputElement.setInputElementCompositeClear = function () {
 			var _handle = this._handle;
 			if (_handle) {
@@ -1566,8 +1560,7 @@ if (nexacro.Browser == "Runtime") {
 			if (_handle) {
 				if (!this._is_focused) {
 					this._is_focused = true;
-
-					if (this.value == null || this.value == undefined) {
+					if (!this.value) {
 						var comp = (this._parent_elem ? this._parent_elem.linkedcontrol : null);
 						var api = comp._edit_base_api;
 						if (api && (api._type_name == "EditMaskString" || api._type_name == "EditMaskNumber" || api._type_name == "EditMaskDate")) {
@@ -2195,7 +2188,6 @@ if (nexacro.Browser == "Runtime") {
 		_pControlElementBase._node_bkurl = "";
 		_pControlElementBase._node_bkrepeat = "";
 		_pControlElementBase._node_bkpos = "";
-		_pControlElementBase._changing_zindex = false;
 		_pControlElementBase.linkedcontrol = null;
 		_pControlElementBase._client_element = null;
 		_pControlElementBase._vml_elem = null;
@@ -2229,19 +2221,6 @@ if (nexacro.Browser == "Runtime") {
 					var old_owner_elem = this._owner_elem;
 					var _owner_elem = this._parent_elem.getContainerElement(position_step);
 					if (old_owner_elem && old_owner_elem._handle && _owner_elem && _owner_elem._handle) {
-						nexacro.__unlinkElementHandle(old_owner_elem._handle, _handle);
-						nexacro.__appendElementHandle(_owner_elem._handle, _handle);
-						this._owner_elem = _owner_elem;
-						this._parent_elem._changing_zindex = true;
-					}
-				}
-			}
-			else {
-				var _handle = this._handle;
-				if (_handle && this._parent_elem) {
-					var old_owner_elem = this._owner_elem;
-					var _owner_elem = this._parent_elem.getContainerElement(position_step);
-					if (old_owner_elem && old_owner_elem._handle && _owner_elem && _owner_elem._handle && this._parent_elem._step_index == position_step && this._parent_elem._changing_zindex) {
 						nexacro.__unlinkElementHandle(old_owner_elem._handle, _handle);
 						nexacro.__appendElementHandle(_owner_elem._handle, _handle);
 						this._owner_elem = _owner_elem;
@@ -6482,14 +6461,15 @@ if (nexacro.Browser == "Runtime") {
 
 		_pPluginObject.getProperty = function (name) {
 			if (this._handle) {
-				Array.prototype.unshift.call(arguments, this._handle);
-				var value = nexacro.__getPluginObjectHandleAttribute.apply(nexacro, arguments);
-				if (value != null && typeof (value) == "object") {
-					var pobject = new nexacro.PluginObject();
-					pobject._handle = value;
-					return pobject;
+				if (name) {
+					var value = nexacro.__getPluginObjectHandleAttribute(this._handle, name);
+					if (value != null && typeof (value) == "object") {
+						var pobject = new nexacro.PluginObject;
+						pobject._handle = value;
+						return pobject;
+					}
+					return value;
 				}
-				return value;
 			}
 		};
 

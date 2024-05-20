@@ -619,7 +619,7 @@ if (!nexacro.Edit) {
 					}
 				}
 
-				input_elem._setElementKeypadType(keypad_type);
+				input_elem.setElementInputType(keypad_type, true);
 
 				if (api._is_selected()) {
 					api._accept_blur_event = false;

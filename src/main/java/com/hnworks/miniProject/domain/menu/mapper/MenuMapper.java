@@ -1,6 +1,5 @@
 package com.hnworks.miniProject.domain.menu.mapper;
 
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -13,6 +12,5 @@ public interface MenuMapper {
 	void save(MenuDto menuDto);
 
 	List<MenuDto> findAll();
-
 
 }

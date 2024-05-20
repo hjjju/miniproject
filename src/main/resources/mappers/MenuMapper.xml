@@ -2,12 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hnworks.miniProject.domain.menu.mapper.MenuMapper">
 
+   
 	<insert id="save" parameterType="MenuDto">
-		INSERT INTO TBMENU( MENU_ID, MENU_NAME,PARENT_ID, MENU_ORDER,MENU_URL,USE_YN)
-		VALUES ( #{menuId}, #{menuName} ,#{parentId}, #{menuOrder}, #{menuUrl}, #{useYn} )
+		INSERT INTO TBMENU
+		( 
+		  MENU_ID,
+		  MENU_NAME,
+		  PARENT_ID,
+		  MENU_ORDER,
+		  MENU_URL,
+		  USE_YN
+	    ) VALUES ( 
+		  #{menuId}, 
+		  #{menuName}, 
+		  #{parentId}, 
+		  #{menuOrder}, 
+		  #{menuUrl}, 
+		  #{useYn} 
+		)
 	</insert>
-
-	<select id="findAll"  parameterType="MenuDto"  resultType="MenuDto">
+		
+  <select id="findAll"  parameterType="MenuDto"  resultType="MenuDto">
+    SELECT MENU_ID    AS menuId,
+           MENU_NAME  AS menuName,
+           MENU_ORDER AS menuOrder,
+           MENU_URL   AS menuURL,
+           PARENT_ID  AS parentId,
+           USE_YN     AS useYn
+      FROM TBMENU	 	
+  </select>
+  
+	<select id="findAlldMenu"   resultType="java.util.Map">
 		SELECT
 		t.MENU_ID AS menuId,
 		t.MENU_NAME AS menuName,
@@ -15,7 +40,6 @@
 		t.MENU_URL AS menuURL,
 		t.PARENT_ID AS parentId,
 		t.USE_YN AS useYn
-		FROM TBMENU t
-		
+		FROM TBMENU t		
 	</select>
 </mapper>

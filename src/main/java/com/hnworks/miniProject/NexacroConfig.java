@@ -2,13 +2,13 @@ package com.hnworks.miniProject;
 
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import com.nexacro.spring.context.ApplicationContextProvider;
@@ -23,7 +23,7 @@ import com.nexacro.xapi.tx.PlatformType;
 @Configuration
 //@ComponentScan(
 //        excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION,classes = Configuration.class))
-public class NexacroConfig extends AutoAppConfig implements WebMvcConfigurer {
+public class NexacroConfig extends AutoAppConfig implements WebMvcRegistrations {
 	@Bean
 	@Lazy(false)
 	public ApplicationContextProvider applicationContextProvider() {
@@ -63,6 +63,7 @@ public class NexacroConfig extends AutoAppConfig implements WebMvcConfigurer {
 	/**
 	 * 넥사크로플랫폼 에러 처리 ExceptionResolver 등록
 	 */
+	
 	@Override
 	public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
 

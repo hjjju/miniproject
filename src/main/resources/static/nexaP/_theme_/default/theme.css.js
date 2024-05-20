@@ -737,7 +737,6 @@
     this._addCss("PopupDiv", "border", obj, ["normal"]);
     this._addCss("PopupDivControl", "border", obj, ["normal"]);
     this._addCss("Step", "border", obj, ["normal"]);
-    this._addCss("StepControl", "border", obj, ["normal"]);
     this._addCss("Calendar>#calendaredit", "border", obj, ["normal"]);
     this._addCss("Calendar>#dropbutton", "border", obj, ["normal"]);
     this._addCss("Calendar>#popupcalendar>#prevbutton", "border", obj, ["normal"]);
@@ -3200,12 +3199,12 @@
     this._addCss("Step", "padding", obj, ["normal"]);
     this._addCss("StepControl", "padding", obj, ["normal"]);
 
+    obj = new nexacro.Style_border("0","none","","");
+    this._addCss("StepControl", "border", obj, ["normal"]);
+    this._addCss("ImageViewer", "border", obj, ["normal"]);
+
     obj = new nexacro.Style_value("1px solid #868686ff");
     this._addCss("StepControl", "buttonborder", obj, ["normal"]);
-
-    obj = new nexacro.Style_border("1","solid","#e5e5e5ff","");
-    this._addCss("ImageViewer", "border", obj, ["normal"]);
-    this._addCss("ImageViewerControl", "border", obj, ["normal"]);
 
     obj = new nexacro.Style_value("100");
     this._addCss("ImageViewer", "opacity", obj, ["normal"]);
@@ -3216,6 +3215,9 @@
     this._addCss("ImageViewerControl", "border", obj, ["mouseover", "focused"]);
     this._addCss("GroupBox", "border", obj, ["normal"]);
     this._addCss("GroupBoxControl", "border", obj, ["normal"]);
+
+    obj = new nexacro.Style_border("0","none","","");
+    this._addCss("ImageViewerControl", "border", obj, ["normal"]);
 
     obj = new nexacro.Style_bordertype("round","10","10","true","true","true","true");
     this._addCss("GroupBox", "bordertype", obj, ["normal"]);

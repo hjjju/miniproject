@@ -1002,11 +1002,6 @@ if (!nexacro.Step) {
 				var ret = this._form.on_fire_canstepchange(this);
 
 				if (ret !== false) {
-					if (!this._form._isComposition()) {
-						return false;
-					}
-
-
 					this.stepindex = this._poststepindex;
 					this.on_apply_stepindex();
 					this._form.on_fire_onstepchanged(this);
