@@ -2,6 +2,8 @@ package com.hnworks.miniProject;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,37 +13,55 @@ import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
-import com.nexacro.spring.context.ApplicationContextProvider;
-import com.nexacro.spring.resolve.NexacroHandlerMethodReturnValueHandler;
-import com.nexacro.spring.resolve.NexacroMappingExceptionResolver;
-import com.nexacro.spring.resolve.NexacroMethodArgumentResolver;
-import com.nexacro.spring.resolve.NexacroRequestMappingHandlerAdapter;
-import com.nexacro.spring.view.NexacroFileView;
-import com.nexacro.spring.view.NexacroView;
-import com.nexacro.xapi.tx.PlatformType;
+import com.hnworks.miniProject.domain.exception.CustomNexacroExceptionResolver;
+import com.nexacro.java.xapi.tx.PlatformType;
+import com.nexacro.uiadapter.spring.core.context.ApplicationContextProvider;
+import com.nexacro.uiadapter.spring.core.resolve.NexacroHandlerMethodReturnValueHandler;
+import com.nexacro.uiadapter.spring.core.resolve.NexacroMappingExceptionResolver;
+import com.nexacro.uiadapter.spring.core.resolve.NexacroMethodArgumentResolver;
+import com.nexacro.uiadapter.spring.core.resolve.NexacroRequestMappingHandlerAdapter;
+import com.nexacro.uiadapter.spring.core.view.NexacroFileView;
+import com.nexacro.uiadapter.spring.core.view.NexacroView;
 
 @Configuration
 //@ComponentScan(
 //        excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION,classes = Configuration.class))
 public class NexacroConfig extends AutoAppConfig implements WebMvcRegistrations {
+
+	/**
+	 * Spring의 ApplicationContext를 제공한다.
+	 * 
+	 * @return
+	 */
 	@Bean
 	@Lazy(false)
 	public ApplicationContextProvider applicationContextProvider() {
 		return new ApplicationContextProvider();
 	}
 
+	/**
+	 * 넥사크로플랫폼 RequestMappingHandlerAdapter 구현체 등록
+	 */
 	@Override
 	public RequestMappingHandlerAdapter getRequestMappingHandlerAdapter() {
 		return new NexacroRequestMappingHandlerAdapter();
 	}
 
+	/**
+	 * 넥사크로플랫폼 ArgumentResolver 등록
+	 */
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+
 		NexacroMethodArgumentResolver nexacroResolver = new NexacroMethodArgumentResolver();
 		resolvers.add(nexacroResolver);
+
 		super.addArgumentResolvers(resolvers);
 	}
 
+	/**
+	 * 넥사크로플랫폼 ReturnValueHandler 등록
+	 */
 	@Override
 	public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> handlers) {
 
@@ -63,7 +83,6 @@ public class NexacroConfig extends AutoAppConfig implements WebMvcRegistrations 
 	/**
 	 * 넥사크로플랫폼 에러 처리 ExceptionResolver 등록
 	 */
-	
 	@Override
 	public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
 
@@ -71,7 +90,7 @@ public class NexacroConfig extends AutoAppConfig implements WebMvcRegistrations 
 		nexacroView.setDefaultContentType(PlatformType.CONTENT_TYPE_XML);
 		nexacroView.setDefaultCharset("UTF-8");
 
-		NexacroMappingExceptionResolver nexacroException = new NexacroMappingExceptionResolver();
+		CustomNexacroExceptionResolver nexacroException = new CustomNexacroExceptionResolver();
 
 		nexacroException.setView(nexacroView);
 		nexacroException.setShouldLogStackTrace(true);
@@ -83,4 +102,5 @@ public class NexacroConfig extends AutoAppConfig implements WebMvcRegistrations 
 
 		super.configureHandlerExceptionResolvers(resolvers);
 	}
+
 }

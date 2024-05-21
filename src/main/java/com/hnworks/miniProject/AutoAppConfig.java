@@ -38,6 +38,8 @@ public abstract class AutoAppConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/*.json").addResourceLocations("classpath:/static/nexaP/");
 		registry.addResourceHandler("/*.html").addResourceLocations("classpath:/static/nexaP/");
 		registry.addResourceHandler("/*.js").addResourceLocations("classpath:/static/nexaP/");
+		registry.addResourceHandler("/*.ico").addResourceLocations("classpath:/static/nexaP/image/");
+		registry.addResourceHandler("/*.png").addResourceLocations("classpath:/static/nexaP/image/");
 	}
 	// 메세지 소스 생성
 	@Bean
@@ -77,4 +79,6 @@ public abstract class AutoAppConfig implements WebMvcConfigurer {
 	}
 
 	public abstract RequestMappingHandlerAdapter getRequestMappingHandlerAdapter();
+	
+	
 }

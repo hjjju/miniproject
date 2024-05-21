@@ -1,8 +1,6 @@
 package com.hnworks.miniProject.domain.menu.repository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,12 +8,13 @@ import org.springframework.stereotype.Component;
 import com.hnworks.miniProject.domain.menu.dto.MenuDto;
 import com.hnworks.miniProject.domain.menu.mapper.MenuMapper;
 
+import lombok.AllArgsConstructor;
+
 @Component
 public class MenuRepositoryImpl implements MenuRepository {
 
-	private final MenuMapper menuMapper;
-
-	@Autowired
+	final private MenuMapper menuMapper;
+	
 	public MenuRepositoryImpl(MenuMapper menuMapper) {
 		super();
 		this.menuMapper = menuMapper;

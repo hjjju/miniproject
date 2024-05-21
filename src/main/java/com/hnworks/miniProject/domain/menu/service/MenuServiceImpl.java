@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.hnworks.miniProject.domain.menu.dto.MenuDto;
 import com.hnworks.miniProject.domain.menu.repository.MenuRepository;
+import com.nexacro.uiadapter.spring.core.data.NexacroResult;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,10 +32,18 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public List<MenuDto> getMenuList() {
 
-		// entity ->dto변경 // List<MenuDto> menuList =
-//	  menuRepository.getMenuList().stream().map(MenuDto::of).collect(Collectors.toList()); 
 		List<MenuDto> menuList = menuRepository.getMenuList();
 
+		//menuList DataSet형식으로 변환해서 controller에 전달
+		
+		NexacroResult result = new NexacroResult();
+		
+		for (MenuDto menuDto : menuList) {
+			result.addDataSet(menuDto.makeDtoDataSet(menuDto));
+		}
+		
+		
+		
 		return menuList;
 	}
 

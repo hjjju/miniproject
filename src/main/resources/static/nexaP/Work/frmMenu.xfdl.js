@@ -29,17 +29,12 @@
 
             
             // UI Components Initialize
-            obj = new Button("btnSearch", "absolute", "101.76%", "56", null, "28", "-9.28%", null, this);
-            obj.set_taborder("1");
-            obj.set_text("조회");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btnAdd", "absolute", "112.7%", "56", null, "28", "-20.12%", null, this);
+            obj = new Button("btnAdd", "absolute", "115.63%", "56", null, "28", "-22.95%", null, this);
             obj.set_taborder("3");
             obj.set_text("추가");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btnDelete", "absolute", "123.54%", "56", null, "28", "-31.05%", null, this);
+            obj = new Button("btnDelete", "absolute", "121.48%", "104", null, "28", "-28.91%", null, this);
             obj.set_taborder("4");
             obj.set_text("삭제");
             this.addChild(obj.name, obj);
@@ -56,13 +51,12 @@
             obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"34\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"No.\"/><Cell col=\"1\" text=\"MENU_NAME\"/><Cell col=\"2\" text=\"PARENT_ID\"/><Cell col=\"3\" text=\"MENU_ORDER\"/><Cell col=\"4\" text=\"MENU_URL\"/><Cell col=\"5\" displaytype=\"normal\" edittype=\"none\" text=\"USE_YN\" combodisplay=\"display\"/></Band><Band id=\"body\"><Cell text=\"expr:currow + 1\"/><Cell col=\"1\" text=\"bind:MENU_NAME\"/><Cell col=\"2\" text=\"bind:PARENT_ID\"/><Cell col=\"3\" text=\"bind:MENU_ORDER\"/><Cell col=\"4\" text=\"bind:MENU_URL\"/><Cell col=\"5\" displaytype=\"normal\" edittype=\"normal\" text=\"bind:USE_YN\" expr=\"expr:USE_YN == &quot;Y&quot;?&quot;사용&quot;:&quot;사용안함&quot;\" editdisplay=\"edit\" combodataset=\"bind:USE_YN\" combodisplay=\"edit\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
-            obj = new Div("topForm", "absolute", "27.54%", "16", null, "125", "1.56%", null, this);
+            obj = new Div("topForm", "absolute", "76.37%", "312", null, "125", "-47.17%", null, this);
             obj.set_taborder("8");
-            obj.set_text("topFrossssss");
             obj.style.set_border("1 solid #808080ff");
             this.addChild(obj.name, obj);
 
-            obj = new Div("leftDiv", "absolute", "8", "21", "30.08%", "739", null, null, this);
+            obj = new Div("leftDiv", "absolute", "1036", "37", "30.08%", "739", null, null, this);
             obj.set_taborder("10");
             obj.set_text("leftDiv");
             this.addChild(obj.name, obj);
@@ -72,6 +66,11 @@
             obj.style.set_border("1 solid #808080ff");
             this.leftDiv.addChild(obj.name, obj);
 
+            obj = new Button("btnSearch", "absolute", "258", "74", "7.62%", "38", null, null, this);
+            obj.set_taborder("11");
+            obj.set_text("조회");
+            this.addChild(obj.name, obj);
+
 
             
             // Layout Functions
@@ -80,7 +79,6 @@
             	//-- Layout function
             	function(p) {
             		p.set_taborder("8");
-            		p.set_text("topFrossssss");
             		p.style.set_border("1 solid #808080ff");
 
             	}
@@ -121,6 +119,26 @@
         
         // User Script
         this.registerScript("frmMenu.xfdl", function(exports) {
+        this.strJsonData //서버에서 보내준 JSON스트링 데이터를 strJsonData 변수에 담기 위해 선언
+
+        
+        this.Application_onload = function(obj,e)
+        {
+          if(system.navigatorname!="nexacro")this.changeFavicon();
+        };
+
+        //favicon이미지경로
+        this.changeFavicon = function() 
+        {
+          var link = document.createElement('link');
+          link.id = 'dynamic-favicon';
+          link.rel = 'shortcut icon';
+          link.href = "./favicon.ico";
+          
+          document.head.appendChild(link);
+        }
+
+        
 
         this.Div01_Combo00_onitemchanged = function(obj,e)
         {
@@ -148,8 +166,8 @@
         }
 
         //조회
-        this.Button00_onclick = function(obj,e)
-        {
+        // this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+        // {
         //   this.transaction(
         //     "selectMenuList"	//구분id
         // 	,"http://localhost:8080/menuList" //url
@@ -158,13 +176,20 @@
         // 	,"" //변수
         // 	,"tr_c" //콜백함수
         // 	); 
-        } 
+        // } 
+        // this.btnSearch.onclick = function(obj:Button, e:nexacro.ClickEventInfo){
+        // 
+        // 	application.alert("test");
+        // 
+        // 
+        // }
 
         
         //callback함수
         this.tr_c = function(sid,ncd,smsg)
         {
-
+        alert(this.ds_menu);
+        	trace(this.ds_Menu);
         //error check
         	if(ncd <0 )
         	{
@@ -180,6 +205,39 @@
         }
 
         
+
+        this.Button00_onclick = function(obj,e)
+        {
+
+        alert('test');
+        /**
+        // var objJson = JSON.parse(this.strJsonData); // 서버에서 받은 JSON String을 JSON Object로 변환
+        	$.ajax({
+        			type: "get",   //get방식으로 명시
+        			url : "http://localhost:8080/menuList",  //이동할 jsp 파일 주소
+        //			dataType :json,   //받을형식
+        //			data:data,
+        			success: function(data){   //데이터 주고받기 성공했을 경우 실행할 결과
+        				//function(data)를 쓰게 되면 전달받은 데이터가 data안에 담아서 들어오게 된다. 
+        				alert("aa"); 
+        				
+        			},
+        			error:function(){   //데이터 주고받기가 실패했을 경우 실행할 결과
+        				alert('실패');
+        			}
+        		})
+        **/
+
+        this.transaction(
+            "selectMenuList"	//구분id
+        	,"http://127.0.0.1:8080/menuList" //url
+        	,"" //서버에서 받는 dataset server=client
+        	,"ds_menu=menuList"//클라이언트에서 받는 데이터셋  client=server	
+        	,"" //변수
+        	,"tr_c" //콜백함수
+        	); 
+
+        }
         
         });
 
@@ -188,10 +246,10 @@
         // Regist UI Components Event
         this.on_initEvent = function()
         {
-            this.btnSearch.addEventHandler("onclick", this.Button00_onclick, this);
             this.btnAdd.addEventHandler("onclick", this.Button01_onclick, this);
             this.btnDelete.addEventHandler("onclick", this.Button02_onclick, this);
             this.GridMenu.addEventHandler("onexpandup", this.Grid00_onexpandup, this);
+            this.btnSearch.addEventHandler("onclick", this.Button00_onclick, this);
 
         };
 
