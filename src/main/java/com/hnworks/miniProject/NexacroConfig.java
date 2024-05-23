@@ -2,8 +2,6 @@ package com.hnworks.miniProject;
 
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,12 +10,10 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
-
 import com.hnworks.miniProject.domain.exception.CustomNexacroExceptionResolver;
 import com.nexacro.java.xapi.tx.PlatformType;
 import com.nexacro.uiadapter.spring.core.context.ApplicationContextProvider;
 import com.nexacro.uiadapter.spring.core.resolve.NexacroHandlerMethodReturnValueHandler;
-import com.nexacro.uiadapter.spring.core.resolve.NexacroMappingExceptionResolver;
 import com.nexacro.uiadapter.spring.core.resolve.NexacroMethodArgumentResolver;
 import com.nexacro.uiadapter.spring.core.resolve.NexacroRequestMappingHandlerAdapter;
 import com.nexacro.uiadapter.spring.core.view.NexacroFileView;

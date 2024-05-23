@@ -10,7 +10,7 @@
             // this._addService(prefixid, type, url, cachelevel, codepage, language, version, communication);
             this._addService("default_typedef.xml", "Base", "form", "./Base/", "", null, "", "0", "0");
             this._addService("default_typedef.xml", "Work", "form", "./Work", "", null, "", "", "0");
-            this._addService("default_typedef.xml", "svc", "JSP", "http://localhost:8080/", "none", null, "", "", "0");
+            this._addService("default_typedef.xml", "svc", "JSP", "http://127.0.0.1:8080/", "none", null, "", "", "0");
 
             this._component_uri = (this._arg_compurl ? this._arg_compurl : "./nexacro14lib/component/");
             // load components
@@ -117,6 +117,7 @@
         this.loadScreenInfo();
         this.loadTheme("default.xtheme");
 
+this.loadCss("Work::menuCss.css");
 
         this.loadIncludeScript("nexaP.xadl", true);
     };

@@ -1,15 +1,14 @@
 package com.hnworks.miniProject.domain.menu.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.hnworks.miniProject.domain.menu.dto.MenuDto;
+import com.nexacro.java.xapi.data.DataSet;
+import com.nexacro.uiadapter.spring.core.data.NexacroResult;
 
 public interface MenuService {
 
-	boolean saveMenu(MenuDto menuDto);
+	public boolean saveMenu(MenuDto menuDto);
 
-	List<MenuDto> getMenuList();
+	public NexacroResult getMenuList();
+	
 
 }
