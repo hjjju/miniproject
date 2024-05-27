@@ -26,6 +26,13 @@ public class MenuServiceImpl implements MenuService {
 		menuRepository.save(menuDto);
 		return true;
 	}
+	
+	/* 
+	* FUNCTION NAME : getMenuList
+	* DESCRIPTION   : 메뉴 조회 후 NexacroResult데이터 형식에 맞게 자료형 변형
+	* PARAM 		    : 
+	*			     
+	*/
 
 	@Override
 	public NexacroResult getMenuList() {
@@ -41,8 +48,6 @@ public class MenuServiceImpl implements MenuService {
 		reDataSet.addColumn("MENU_URL", DataTypes.STRING, 100);
 		reDataSet.addColumn("USER_YN", DataTypes.STRING, 4);
 
-		// PlatformData 생성
-		PlatformData respdata  = new PlatformData();
 		NexacroResult result = new NexacroResult();
 		
 		

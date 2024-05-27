@@ -55,7 +55,6 @@
 			<systemPath>
 				C:\Dev\workspace\miniProject/src/main/webapp/WEB-INF/lib/uiadapter-spring-core-1.0.0.jar</systemPath>
 		</dependency>
-
 		<dependency>
 			<groupId>uiadapter-spring-dataaccess-1.0.0</groupId>
 			<artifactId>uiadapter-data</artifactId>
@@ -64,7 +63,6 @@
 			<systemPath>
 				C:\Dev\workspace\miniProject/src/main/webapp/WEB-INF/lib/uiadapter-spring-dataaccess-1.0.0.jar</systemPath>
 		</dependency>
-
 		<dependency>
 			<groupId>uiadapter-spring-excel-1.0.0</groupId>
 			<artifactId>uiadapter-excel</artifactId>
@@ -82,8 +80,7 @@
 				C:\Dev\workspace\miniProject/src/main/webapp/WEB-INF/lib/nexacro-xapi-java-1.0.1.jar</systemPath>
 		</dependency>
 		<!-- nexa14 jar end-->
-		<!--
-		https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
+		<!--https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
@@ -156,12 +153,10 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>

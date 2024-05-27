@@ -48,7 +48,7 @@
             obj.set_text("저장");
             this.addChild(obj.name, obj);
 
-            obj = new Grid("GridMenu", "absolute", "192", "108", null, "580", "10", null, this);
+            obj = new Grid("GridMenu", "absolute", null, "108", "752", null, "10", "10", this);
             obj.set_taborder("5");
             obj.set_binddataset("ds_menu");
             obj.set_autosizingtype("none");
@@ -63,7 +63,7 @@
             obj.set_text("조회");
             this.addChild(obj.name, obj);
 
-            obj = new ImageViewer("logoImage", "absolute", "0", "0", "154", "40", null, null, this);
+            obj = new ImageViewer("logoImage", "absolute", "10", "10", "154", "40", null, null, this);
             obj.set_taborder("12");
             obj.set_image("URL('theme://images/customlogo.png')");
             obj.set_stretch("fit");
@@ -177,6 +177,7 @@
         // Regist UI Components Event
         this.on_initEvent = function()
         {
+            this.addEventHandler("onload", this.mainFrane_onload, this);
             this.btnAdd.addEventHandler("onclick", this.Button01_onclick, this);
             this.btnDelete.addEventHandler("onclick", this.Button02_onclick, this);
             this.GridMenu.addEventHandler("onexpandup", this.Grid00_onexpandup, this);

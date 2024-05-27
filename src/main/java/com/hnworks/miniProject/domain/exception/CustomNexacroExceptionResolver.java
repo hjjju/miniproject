@@ -102,8 +102,7 @@ import com.nexacro.uiadapter.spring.core.view.NexacroView;
 	                mav.setErrorMsg(getExceptionSendMessage(ex));
 	            } else {
 	                // PlatformException..
-	                mav.setErrorCode(NexacroException.DEFAULT_ERROR_CODE);              //Undefined error Code
-//	                mav.setErrorMsg(NexacroException.DEFAULT_MESSAGE);         
+	                mav.setErrorCode(NexacroException.DEFAULT_ERROR_CODE);
 	                mav.setErrorMsg(getExceptionSendMessage(ex));         
 	            }
 	            
